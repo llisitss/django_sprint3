@@ -7,8 +7,12 @@ from django.utils import timezone
 
 
 def published_posts():
-    return Post.objects.select_related("author", "location", "category").filter(
-        is_published=True, pub_date__lte=timezone.now(), category__is_published=True
+    return Post.objects.select_related(
+        "author", "location", "category"
+    ).filter(
+        is_published=True,
+        pub_date__lte=timezone.now(),
+        category__is_published=True,
     )
 
 

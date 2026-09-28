@@ -16,7 +16,9 @@ class PublishedModel(models.Model):
 
 
 class CreatedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Добавлено")
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="Добавлено"
+    )
 
     class Meta:
         abstract = True
@@ -28,7 +30,10 @@ class Category(PublishedModel, CreatedModel):
     slug = models.SlugField(
         unique=True,
         verbose_name="Идентификатор",
-        help_text="Идентификатор страницы для URL; разрешены символы латиницы, цифры, дефис и подчёркивание.",
+        help_text=(
+            "Идентификатор страницы для URL; "
+            "разрешены символы латиницы, цифры, дефис и подчёркивание."
+        ),
     )
 
     class Meta:
@@ -55,7 +60,10 @@ class Post(PublishedModel, CreatedModel):
     text = models.TextField(verbose_name="Текст")
     pub_date = models.DateTimeField(
         verbose_name="Дата и время публикации",
-        help_text="Если установить дату и время в будущем — можно делать отложенные публикации.",
+        help_text=(
+            "Если установить дату и время в будущем — "
+            "можно делать отложенные публикации."
+        ),
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="Автор публикации"
@@ -68,7 +76,10 @@ class Post(PublishedModel, CreatedModel):
         verbose_name="Местоположение",
     )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, verbose_name="Категория"
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Категория",
     )
 
     class Meta:
